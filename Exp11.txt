@@ -1,0 +1,92 @@
+clc; clear; close all; 
+
+% Original signal parameters
+
+fmax = 10; % Max frequency in signal
+
+t = 0:0.001:0.5; % Time vector
+
+x = cos(2*pi*fmax*t); % Original signal
+
+% Case 1: Under Sampling (fs < 2*fmax)
+
+fs1 = 15; % Sampling frequency
+
+ts1 = 0:1/fs1:0.5; 
+
+x1 = cos(2*pi*fmax*ts1); 
+
+% Case 2: Nyquist Rate (fs = 2*fmax)
+
+fs2 = 20; % Sampling frequency
+
+ts2 = 0:1/fs2:0.5; 
+
+x2 = cos(2*pi*fmax*ts2); 
+
+% Case 3: Over Sampling (fs > 2*fmax)
+
+fs3 = 40;
+ts3 = 0:1/fs3:0.5; 
+
+x3 = cos(2*pi*fmax*ts3); 
+
+% Case 4: More Over Sampling (fs >> 2*fmax)
+
+fs4 = 60; % Sampling frequency
+
+ts4 = 0:1/fs4:0.5; 
+
+x4 = cos(2*pi*fmax*ts4); 
+
+% Plotting results
+
+figure; 
+
+subplot(4,1,1); 
+
+plot(t,x,'k'); hold on; 
+
+stem(ts1,x1,'r','filled'); 
+
+title('Under Sampling (fs = 15 Hz)'); 
+
+xlabel('Time (s)'); ylabel('Amplitude'); 
+
+legend('Original','Sampled'); 
+
+subplot(4,1,2); 
+
+plot(t,x,'k'); hold on; 
+
+stem(ts2,x2,'b','filled'); 
+
+title('Critical Sampling (fs = 20 Hz)'); 
+
+xlabel('Time (s)'); ylabel('Amplitude'); 
+
+legend('Original','Sampled'); 
+
+subplot(4,1,3); 
+
+plot(t,x,'k'); hold on; 
+
+stem(ts3,x3,'g','filled'); 
+
+title('Over Sampling (fs = 40 Hz)'); 
+
+xlabel('Time (s)'); ylabel('Amplitude'); 
+
+legend('Original','Sampled'); 
+
+subplot(4,1,4); 
+
+plot(t,x,'k'); hold on; 
+
+stem(ts4,x4,'m','filled'); 
+
+title('More Over Sampling (fs = 60 Hz)'); 
+
+xlabel('Time (s)'); ylabel('Amplitude'); 
+
+legend('Original','Sampled'); 
