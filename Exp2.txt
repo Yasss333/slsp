@@ -1,0 +1,84 @@
+% Clear command window, workspace variables, and close all 
+
+figures
+
+clc; clear; close all; 
+
+% Time vector
+
+t = -10:0.01:10; % Define time range from -10 to 10 with 0.01 
+
+step size
+
+% Define the original signal x(t)
+
+x = (t >= 0); % Unit step function: x(t) = 1 for t >= 0, else 
+
+0
+
+% Compute the given signals
+
+x_shifted_3 = (t-3 >= 0); % Delayed signal: x(t-3), shifted 3 
+
+units to the right
+
+x_scaled_2 = 2*x; % Amplitude scaled signal: 2 * x(t)
+
+x_scaled_neg3 = -3*x; % Amplitude scaled and inverted: -3 
+
+* x(t)
+
+x_combined = (t-2 >= 0) + 3*x; % Combined signal: x(t-2) + 
+
+3x(t)
+
+% Plotting the signals in subplots
+
+figure; 
+
+% Plot 1: Delayed signal x(t-3)
+
+subplot(2,2,1); 
+
+plot(t, x_shifted_3, 'r', 'LineWidth', 2 ); 
+
+xlabel('t'); ylabel('x(t-3)'); 
+
+title('Delayed Signal x(t-3)'); 
+
+grid on; 
+
+% Plot 2: Scaled signal 2x(t)
+
+subplot(2,2,2); 
+
+plot(t, x_scaled_2, 'g', 'Linewidth', 2); 
+
+xlabel('t'); ylabel('2x(t)'); 
+
+title('Scaled Signal 2x(t)'); 
+
+grid on; 
+
+% Plot 3: Scaled and inverted signal -3x(t)
+
+subplot (2,2,3); 
+
+plot(t, x_scaled_neg3, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('-3x(t)'); 
+
+title('Scaled & Inverted Signal -3x(t)'); 
+
+grid on; 
+
+% Plot 4: Combined signal x(t-2) + 3x(t)
+subplot(2,2,4); 
+
+plot(t, x_combined, 'm', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t-2) + 3x(t)'); 
+
+title('Combined Signal x(t-2) + 3x(t)'); 
+
+grid on; 
