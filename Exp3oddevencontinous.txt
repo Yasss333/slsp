@@ -1,0 +1,54 @@
+clc; clear; close all; % Clear command window, workspace variables, and close all figure windows
+
+% Define time range
+tmin = -5;  % Minimum time
+dt = 0.1;   % Time step (increment)
+tmax = 5;   % Maximum time
+
+t = tmin:dt:tmax; % Create a time vector from -5 to 5 with step size 0.1
+
+% Define the signals
+x1 = cos(t) + sin(t) + cos(t).*sin(t); % Define first signal: x1(t) = cos(t) + sin(t) + cos(t)*sin(t)
+x2 = cos(t) - sin(t) - cos(t).*sin(t); % Define second signal: x2(t) = cos(t) - sin(t) - cos(t)*sin(t)
+
+% Check the symmetry of the signal: Even, Odd, or Neither
+if x1 == x2 
+    fprintf("Signal is Even\n"); % If x1 is equal to x2, signal is even
+elseif x2 == -x1 
+    fprintf("Signal is Odd\n");  % If x2 is negative x1, signal is odd
+else
+    fprintf("Signal is neither even nor odd\n"); % Otherwise, it is neither
+
+    % If neither, compute the even and odd parts of the signal
+
+    xe = (x1 + x2) / 2; % Even part formula: (x(t) + x(-t)) / 2
+    xo = (x1 - x2) / 2; % Odd part formula: (x(t) - x(-t)) / 2
+
+    % Plot the even part
+    subplot(2,2,3); % Divide figure into 2x2 grid and select 3rd subplot
+    plot(t, xe, 'r', 'LineWidth', 2); % Plot even part in red color
+    xlabel('t'); ylabel('xe(t)'); % Label x and y axis
+    title('Even Part'); % Title of the plot
+    grid on; % Turn on grid
+
+    % Plot the odd part
+    subplot(2,2,4); % Select 4th subplot
+    plot(t, xo, 'm', 'LineWidth', 2); % Plot odd part in magenta color
+    xlabel('t'); ylabel('xo(t)'); % Label x and y axis
+    title('Odd Part'); % Title of the plot
+    grid on; % Turn on grid
+end
+
+% Plot the original signal x1
+subplot(2,2,1); % Select 1st subplot
+plot(t, x1, 'g', 'LineWidth', 2); % Plot x1(t) in green color
+xlabel('t'); ylabel('x(t)'); % Label x and y axis
+title('Original Signal x1'); % Title of the plot
+grid on; % Turn on grid
+
+% Plot the original signal x2
+subplot(2,2,2); % Select 2nd subplot
+plot(t, x2, 'b', 'LineWidth', 2); % Plot x2(t) in blue color
+xlabel('t'); ylabel('x(t)'); % Label x and y axis
+title('Original Signal x2'); % Title of the plot
+grid on; % Turn on grid
