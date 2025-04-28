@@ -1,0 +1,182 @@
+tmin = 0; 
+
+tmax = 10; 
+
+dt = 0.01; 
+
+t = tmin:dt:tmax; % Time vector
+
+x1 = t.*(t >= 0); % Ramp signal 
+
+x2 = exp(-4*t).*(t >= 0); % Exponentially decaying 
+
+x3 = conv(x1, x2); % Convolution of x1 and x2
+
+n3 = length(x3); 
+
+t1 = (0:n3-1) * dt; % Adjust time axis
+
+% Plot x1(t)
+
+subplot(3,1,1); 
+
+plot(t, x1); 
+
+xlabel('t'); ylabel('x1(t)'); 
+
+title('Signal x1(t)'); 
+
+% Plot x2(t)
+
+subplot(3,1,2); 
+
+plot(t, x2); 
+
+xlabel('t'); ylabel('x2(t)'); 
+
+title('Signal x2(t)'); 
+
+% Plot x3(t) = x1(t) * x2(t)
+
+subplot(3,1,3); 
+
+plot(t1, x3); 
+
+xlabel('t'); ylabel('x3(t)'); 
+
+title('Signal x3(t) = x1(t) * x2(t)'); 
+
+xlim([0 6]); Optional: adjust for better visibility
+
+
+
+Code: 
+
+% x[n]
+
+t = 0:1:7; 
+
+x = [2,1,1,1,1,1,1,0.5]; 
+
+subplot(3,3,1); 
+
+stem(t, x); 
+
+xlabel('Time (t)'); 
+
+title('x[n]'); 
+
+% y[n]
+t = 0:1:13; 
+
+y = [2,0,1,0,1,0,1,0,1,0,1,0,1,0.5]; 
+
+subplot(3,3,2); 
+
+stem(t, y); 
+
+xlabel('Time (t)'); 
+
+title('y[n]'); 
+
+% x[2n]
+
+t = 0:1:3; 
+
+x1 = x(1:2:end); % Taking every second element from x
+
+subplot(3,3,3); 
+
+stem(t, x1); 
+
+xlabel('Time (t)'); 
+
+title('x[2n]'); 
+
+% x[n/2]
+
+t = 0:2:14; 
+
+x2 = x; 
+
+subplot(3,3,4); 
+
+stem(t, x2); 
+
+xlabel('Time (t)'); 
+
+title('x[n/2]'); 
+
+% x[n-2] 
+
+t = 2:1:9; 
+
+x3 = x; 
+
+subplot(3,3,5); 
+
+stem(t, x3); 
+
+xlabel('Time (t)'); 
+
+title('x[n-2]'); 
+
+% y[n-2]
+
+t = 2:1:15; 
+
+x4 = y; 
+
+subplot(3,3,6); 
+
+stem(t, x4); 
+
+xlabel('Time (t)'); 
+
+title('y[n-2]'); 
+
+% x[n-2] + y[n-2]
+
+t = 2:1:15; 
+
+x_new = x; 
+
+x_new(end+1:14) = 0; % Expanding x_new to the desired length
+
+x5 = x_new + y; 
+
+subplot(3,3,7); 
+
+stem(t, x5); 
+
+xlabel('Time (t)'); 
+
+title('x[n-2] + y[n-2]'); 
+
+% x[n] * y[n] *
+
+t = 0:1:13; 
+
+x6 = x_new .* y; 
+
+subplot(3,3,8); 
+
+stem(t, x6); 
+
+xlabel('Time (t)'); 
+
+title('x[n] * y[n]'); 
+
+% y[1-n]*
+
+t = -12:1:1; % Adjusting t range
+
+x7 = y; 
+
+subplot(3,3,9); 
+
+stem(t, x7); 
+
+xlabel('Time (t)'); 
+
+title('y[1-n]'); 
