@@ -1,166 +1,73 @@
-Triangular signal:
+clc;
+clear all;
+close all;
+
+% Common time vector
+tmin = -5; 
+dt = 0.1; 
+tmax = 5;
+t = tmin:dt:tmax;
+
+% Unit Impulse Signal
+x1 = 1;
+x2 = 0;
+x = x1.*(t==0) + x2.*(t~=0);
+subplot(3,3,1); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Unit Impulse Signal');
+
+% Unit Step Signal
+x1 = 1;
+x2 = 0;
+x = x1.*(t>=0) + x2.*(t<0);
+subplot(3,3,2); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Unit Step Signal');
+
+% Unit Ramp Signal
+x1 = t;
+x2 = 0;
+x = x1.*(t>=0) + x2.*(t<0);
+subplot(3,3,3); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Unit Ramp Signal');
+
+% Parabolic Signal
+A = 0.4;
+x1 = (A*(t.^2))/2;
+x2 = 0;
+x = x1.*(t>=0) + x2.*(t<0);
+subplot(3,3,4); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Parabolic Signal');
+
+% Sinusoidal Signal
+T = 2;
+F = 1/T;
+x = sin(2*pi*F*t);
+subplot(3,3,5); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Sinusoidal Signal');
+
+% Triangular Signal
+a = 2;
+x1 = 1 - abs(t)/a;
+x2 = 0;
+x = x1.*(abs(t)<=a) + x2.*(abs(t)>=a);
+subplot(3,3,6); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Triangular Signal');
+
+% Signum Signal
+x1 = 1;
+x2 = 0;
+x3 = -1;
+x = x1.*(t>0) + x2.*(t==0) + x3.*(t<0);
+subplot(3,3,7); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Signum Signal');
+
+% Sinc Signal
+x = sinc(t); % 'sinc' in MATLAB is sin(pi*t)/(pi*t)
+subplot(3,3,8); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Sinc Signal');
+
+% Gaussian Signal
+a = 2;
+x = exp(-a.*(t.^2));
+subplot(3,3,9); plot(t,x);
+xlabel('t'); ylabel('x(t)'); title('Gaussian Signal');
 
-CODEa=2;
-
-x1=1-abs(t)/a; 
-
-x2=0;
-
-x=x1.*(abs(t)<=a)+x2.*(abs(t)>=a);
-
-subplot(3,3,6);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('triangularsignal');
-
-Signum signal:
-
-CODEx1=1; 
-
-x2=0; 
-
-x3=-1;
-
-x=x1.*(t>0)+x2.*(t==0)+x3.*(t<0);
-
-subplot(3,3,7);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('signum signal');
-
-Sinc Signal:
-
-CODEtmin=-5;dt=0.1;tmax=5; 
-
-t=tmin:dt:tmax; 
-
-x=sinc(t) 
-
-subplot(3,3,8);plot(t,x);
-
-xlabel(‘t’);ylabel(‘x(t)’);title(‘sinc signal’)
-Unit Ramp Signal:
-
-CODEx1=t; 
-
-x2=0;
-
-x=x1.*(t>=0)+x2.*(t<0);
-
-subplot(3,3,3);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('unit ramp signal');
-
-Parabolic Signal:
-
-CODEA=0.4;
-
-x1=(A*(t.^2))/2; 
-
-x2=0;
-
-x=x1.*(t>=0)+x2.*(t<0);
-
-subplot(3,3,4);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('parabolic signal');
-
-Sinusoidal Signal:
-
-CODET=2;
-
-F=1/T;
-
-x=sin(2*pi*F*t); 
-
-subplot(3,3,5);plot(t,x);
-
-xlabel('t');ylabel('x(t)');title('sinusoidal signal');
-Unit Impulse Signal:
-
-CODEtmin=-5; dt=0.1; tmax=5; 
-
-t=tmin:dt:tmax;
-
-x1=1; 
-
-x2=0;
-
-x=x1.*(t==0)+x2.*(t~=0);
-
-subplot(3,3,1);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('unit impulse signal');
-
-Unit Step Signal:
-
-CODEx1=1; 
-
-x2=0;
-
-x=x1.*(t>=0)+x2.*(t<0);
-
-subplot(3,3,2);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('unit step signal');
-Gaussian Signal:
-
-CODEa=2;
-
-x=exp(-a.*(t.^2));
-
-subplot(3,3,9);plot(t,x); 
-
-xlabel('t');ylabel('x(t)');title('gaussian signal');
-Exponentially decaying sinusoidal signal:
-
-CODET=1; 
-
-a=100; 
-
-b=0.5; 
-
-F=1/T;
-
-x=a*exp(-b*t).*sin(2*pi*F*t); 
-
-subplot(3,3,1);plot(t,x);
-
-xlabel('t');ylabel('x(t)');title('Exponentially decaying sinusoidal signal');
-
-Exponentially increasing sinusoidal signal:
-
-CODET=1; 
-
-a=100; 
-
-b=0.5; 
-
-F=1/T;
-
-x=a*exp(b*t).*sin(2*pi*F*t); 
-
-subplot(3,3,4);plot(t,x);
-
-xlabel('t');ylabel('x(t)');title('Exponentially rising sinusoidal signal');
-
-Exponential increase signal:
-
-CODEa=10; 
-
-b=0.3;
-
-x=a*exp(b*t); 
-
-subplot(3,3,3);plot(t,x);
-
-xlabel('t');ylabel('x(t)');title('Exponentially increase signal');
-Exponential decrease signal:
-
-CODEa=10; 
-
-b=0.3;
-
-x=a*exp(-b*t); 
-
-subplot(3,3,6);plot(t,x);
-
-xlabel('t');ylabel('x(t)');title('Exponentially decrease signal');
