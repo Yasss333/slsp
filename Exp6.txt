@@ -1,0 +1,378 @@
+clc; 
+
+close all; 
+
+clear; 
+
+% Take input from the user for the sequences x and h
+
+x = input('Enter input sequence (as a vector): '); 
+
+h = input('Enter the impulse sequence (as a vector): '); 
+
+% Plot the input signal x(n)
+
+subplot(3,1,1); 
+
+stem(x); 
+
+xlabel('n'); 
+
+ylabel('x(n)'); 
+
+title('Input Signal'); 
+
+% Plot the impulse signal h(n)
+
+subplot(3,1,2); 
+
+stem(h); 
+
+xlabel('n'); 
+
+ylabel('h(n)'); 
+
+title('Impulse Signal'); 
+
+% Compute the cross-correlation of x and h
+
+y = xcorr(x, h); 
+
+% Plot the correlation signal y(n)
+
+subplot(3,1,3); 
+
+stem(y); 
+
+xlabel('n'); 
+
+ylabel('y(n)'); 
+
+title('Correlation Signal'); 
+
+% Display the resultant signal in the command window
+disp('The resultant signal is:'); 
+
+disp(y); 
+
+
+clc; % Clear command window
+
+close all; % Close all figure windows
+
+clear all; % Clear all variables from workspace
+
+% Taking input for x(n) and its time indices
+
+x = input('Enter input sequence of x(n): '); 
+n1 = input('Enter the time indices of x(n): '); 
+
+% Taking input for y(n) and its time indices
+
+y = input('Enter the sequence of y(n):'); 
+
+n2 = input('Enter the time indices of y(n):'); 
+
+% Time reversal of y(n) to get y(-n)
+
+n22 = -fliplr(n2); % Flip time indices of y(n) and make 
+
+them negative
+
+y1 = fliplr(y); % Flip the sequence y(n)
+
+% Time index for cross-correlation result
+
+n = min(n1) + min(n22) : max(n1) + max(n22); 
+
+% Initialize matrix A for partial product storage
+
+A = zeros(min(length(x), length(y1)), length(x) + length(y1) - 
+
+1); 
+
+% Cross-correlation logic using convolution-style computation
+
+if length(x) < length(y1) 
+
+ for i = 1:length(x) 
+
+ A(i, i:i+length(y1)-1) = y1(1,:); % Place y1 at 
+
+proper index
+
+ A(i,:) = x(i) .* A(i,:); % Multiply by x(i)
+
+ end
+
+else
+
+ for i = 1:length(y1) 
+
+ A(i, i:i+length(x)-1) = x(1,:); % Place x at 
+
+proper index
+
+ A(i,:) = y1(i) .* A(i,:); % Multiply by 
+
+y1(i)
+
+ end
+
+end
+
+% Summing partial products to get final cross-correlation
+
+c = zeros(1, length(x) + length(y1) - 1); 
+
+for i = 1:min(length(x), length(y1)) 
+
+ c(1,:) = c(1,:) + A(i,:); % Accumulate 
+
+results
+
+end
+
+% Display the cross-correlation and its time indices
+
+disp('The Cross correlation between the given sequences is'); 
+
+disp(c); 
+
+disp('The Time index of the Cross correlation is'); 
+
+disp(n); 
+
+% Plotting input sequence x(n)
+
+subplot(3,1,1); 
+
+stem(n1, x, 'o'); % Unfilled circle 
+
+markers
+xlabel('time'); 
+
+ylabel('amplitude'); 
+
+grid; 
+
+title('Given sequence x(n)'); 
+
+% Plotting reversed sequence y(-n)
+
+subplot(3,1,2); 
+
+stem(n22, y1, 'o'); % Unfilled circle 
+
+markers
+
+xlabel('time'); 
+
+ylabel('amplitude'); 
+
+grid; 
+
+title('Sequence y(-n)'); 
+
+% Plotting cross-correlation result
+
+subplot(3,1,3); 
+
+stem(n, c, 'o'); % Unfilled circle 
+
+markers
+
+xlabel('time'); 
+
+ylabel('amplitude'); 
+
+grid; 
+
+title('Cross correlation of x(n) and y(n)'); 
+f1=input('enter the frequency of signal1 : ') % Input 
+
+frequency of first signal
+
+T1=1/f1; % Time 
+
+period of first signal
+
+t1=0:T1/f1:T1; % Time 
+
+vector for signal1
+
+x=sin(2*pi*f1*t1); % Sine wave 
+
+x(t) with frequency f1
+
+f2=input('enter the frequency of signal2 : ') % Input 
+
+frequency of second signal
+
+T2=1/f2; % Time 
+
+period of second signal
+
+t2=0:T2/f2:T2; % Time 
+
+vector for signal2
+
+y=sin(2*pi*f2*t2); % Sine wave 
+
+y(t) with frequency f2
+
+t22=-fliplr(t2); % Time 
+
+reversal of t2 → -t
+
+y1=fliplr(y); % Reversed 
+
+signal y(t) → y(-t)
+
+% Initialize matrix A for storing partial products
+
+A=zeros(min(length(x),length(y1)),length(x)+length(y1)-1); 
+
+% Cross-correlation logic based on signal lengths
+
+if length(x)<length(y1) 
+
+ for i=1:length(x) 
+
+ A(i,i:i+length(y1)-1)=y1(1,:); % Align y1 
+
+in matrix A
+
+ A(i,:)=x(i).*A(i,:); % Multiply 
+
+x(i) with y1
+
+ end
+
+else
+
+ for i=1:length(y1) 
+
+ A(i,i:i+length(x)-1)=x(1,:); % Align x 
+
+in matrix A
+
+ A(i,:)=y1(i).*A(i,:); % Multiply 
+
+y1(i) with x
+
+ end
+
+end
+
+% Summing partial products to get cross-correlation result
+
+c=zeros(1,length(x)+length(y1)-1); 
+
+for i=1:min(length(x),length(y1)) 
+
+c(1,:)=c(1,:)+A(i,:); % 
+
+Accumulate row-wise sum
+
+end
+
+% Time vector for plotting correlation result
+
+t=linspace(min(t1)+min(t22),max(t1)+max(t22),length(c)); 
+
+% Plot signal x(t)
+
+subplot(3,1,1) 
+
+plot(t1,x) 
+
+xlabel('time') 
+
+ylabel('amplitude') 
+
+grid 
+
+title('Given signal x(t) with f=100') 
+
+% Plot time-reversed signal y(-t)
+
+subplot(3,1,2) 
+
+plot(t22,y1) 
+
+xlabel('time') 
+
+ylabel('amplitude') 
+
+grid 
+
+title(' signal y(-t) with f=150') 
+
+% Plot cross-correlation result
+
+subplot(3,1,3) 
+
+plot(t,c) 
+
+xlabel('time') 
+
+ylabel('amplitude') 
+
+grid 
+
+title('Cross correlation of x(t) and y(t)') 
+
+
+clc; % Clear command window
+
+close all; % Close all figure windows
+
+clear; % Clear all variables from workspace
+
+x = [1,2,3,4,5]; % Define first input signal x(n)
+
+y = [4,1,5,2,6]; % Define second input signal y(n)
+
+% Plotting the first input signal x(n)
+
+subplot(3,1,1); 
+
+stem(x); % Discrete-time plot of x(n)
+
+xlabel('n'); 
+
+ylabel('x(n)'); 
+title('input signal'); % Title for x(n)
+
+% Plotting the second input signal y(n)
+
+subplot(3,1,2); 
+
+stem(y); % Discrete-time plot of y(n)
+
+xlabel('n'); 
+
+ylabel('y(n)'); 
+
+title('input signal'); % Title for y(n)
+
+% Cross-correlation of x with itself (auto-correlation)
+
+z = xcorr(x,x); 
+
+% Plotting the resulting signal z(n)
+
+subplot(3,1,3); 
+
+stem(z); % Discrete-time plot of correlation 
+
+result
+
+xlabel('n'); 
+
+ylabel('z(n)'); 
+
+title('resultant signal signal'); % Title for correlation 
+
+result
