@@ -1,0 +1,132 @@
+clc; clear; close all;
+
+%% Experiment Aim:
+% To perform convolution of different continuous-time signals 
+% and plot the original and convolved signals.
+
+%% Example 1: Convolution of Two Step Signals
+tmin = 0; tmax = 10; dt = 0.01; % Define start, end, and time step
+t = tmin:dt:tmax;               % Time vector from 0 to 10
+
+x1 = 2.*(t >= 0); % Step signal x1(t) with amplitude 2
+x2 = 1.*(t >= 0); % Step signal x2(t) with amplitude 1
+
+x3 = conv(x1, x2) * dt; % Convolution and scaling by dt
+n3 = length(x3); 
+t1 = (0:n3-1) * dt; % Time axis for convolved signal
+
+figure;
+subplot(3,1,1);
+plot(t, x1, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x1(t)');
+title('Signal x1(t) - Step Signal');
+grid on;
+
+subplot(3,1,2);
+plot(t, x2, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x2(t)');
+title('Signal x2(t) - Step Signal');
+grid on;
+
+subplot(3,1,3);
+plot(t1, x3, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x3(t)');
+title('Convolution Result x3(t) = x1(t) * x2(t)');
+xlim([0 6]); % Adjusted for better view
+grid on;
+
+
+%% Example 2: Convolution of Two Exponentially Decaying Signals
+tmin = 0; tmax = 10; dt = 0.01;
+t = tmin:dt:tmax;
+
+x1 = exp(-4*t).*(t >= 0); % Exponentially decaying signal
+x2 = exp(-6*t).*(t >= 0); % Another exponentially decaying signal
+
+x3 = conv(x1, x2) * dt;
+n3 = length(x3);
+t1 = (0:n3-1) * dt; 
+
+figure;
+subplot(3,1,1);
+plot(t, x1, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x1(t)');
+title('Signal x1(t) - Exp(-4t)');
+grid on;
+
+subplot(3,1,2);
+plot(t, x2, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x2(t)');
+title('Signal x2(t) - Exp(-6t)');
+grid on;
+
+subplot(3,1,3);
+plot(t1, x3, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x3(t)');
+title('Convolution Result x3(t) = x1(t) * x2(t)');
+xlim([0 6]);
+grid on;
+
+
+%% Example 3: Convolution of a Cosine and Ramp Signal
+tmin = 0; tmax = 10; dt = 0.01;
+t = tmin:dt:tmax;
+
+x1 = cos(t).*(t >= 0); % Cosine wave starting at t=0
+x2 = t.*(t >= 0);      % Ramp function
+
+x3 = conv(x1, x2) * dt;
+n3 = length(x3);
+t1 = (0:n3-1) * dt; 
+
+figure;
+subplot(3,1,1);
+plot(t, x1, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x1(t)');
+title('Signal x1(t) - Cos(t)');
+grid on;
+
+subplot(3,1,2);
+plot(t, x2, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x2(t)');
+title('Signal x2(t) - Ramp');
+grid on;
+
+subplot(3,1,3);
+plot(t1, x3, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x3(t)');
+title('Convolution Result x3(t) = x1(t) * x2(t)');
+xlim([0 6]);
+grid on;
+
+
+%% Example 4: Convolution of a Ramp and Exponential Signal
+tmin = 0; tmax = 10; dt = 0.01;
+t = tmin:dt:tmax;
+
+x1 = t.*(t >= 0);        % Ramp signal
+x2 = exp(-4*t).*(t >= 0); % Exponentially decaying signal
+
+x3 = conv(x1, x2) * dt;
+n3 = length(x3);
+t1 = (0:n3-1) * dt;
+
+figure;
+subplot(3,1,1);
+plot(t, x1, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x1(t)');
+title('Signal x1(t) - Ramp');
+grid on;
+
+subplot(3,1,2);
+plot(t, x2, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x2(t)');
+title('Signal x2(t) - Exp(-4t)');
+grid on;
+
+subplot(3,1,3);
+plot(t1, x3, 'LineWidth', 1.5);
+xlabel('t'); ylabel('x3(t)');
+title('Convolution Result x3(t) = x1(t) * x2(t)');
+xlim([0 6]);
+grid on;
