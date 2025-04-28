@@ -1,0 +1,63 @@
+clc;
+clear;
+close all;
+
+% Input the original sequence x[n]
+x = input('Enter the sequence x[n]= '); % Example: [0 2 3 1 -2 7 3]
+
+% Input the impulse response h[n] of the system
+h = input('Enter the sequence h[n]= '); % Example: [4 -5 -11 -3 7 2 6 8 -15]
+
+% Input the desired delay value
+d = input('Enter the positive number for delay d= '); % Example: 5
+
+% Create delayed version of x[n] by prepending 'd' zeros
+xdn = [zeros(1, d), x]; % xdn = x[n-d]
+
+% Compute system response (output) for actual input x[n]
+yn = conv(x, h); % y[n] = x[n] * h[n]
+
+% Compute system response (output) for delayed input x[n-d]
+ydn = conv(xdn, h); % y_d[n] = x[n-d] * h[n]
+
+% Plot original and delayed input sequences
+figure;
+subplot(2,1,1);
+stem(0:length(x)-1, x, 'filled'); % x[n] from n = 0 to length(x)-1
+xlabel('n --->');
+ylabel('Amplitude');
+title('The sequence x[n]');
+grid on;
+
+subplot(2,1,2);
+stem(0:length(xdn)-1, xdn, 'filled'); % Delayed input sequence x[n-d]
+xlabel('n --->');
+ylabel('Amplitude');
+title('The delayed sequence x[n]');
+grid on;
+
+% Plot system responses to original and delayed inputs
+figure;
+subplot(2,1,1);
+stem(0:length(yn)-1, yn, 'filled'); % Response y[n] to x[n]
+xlabel('n --->');
+ylabel('Amplitude');
+title('The response of the system to x[n]');
+grid on;
+
+subplot(2,1,2);
+stem(0:length(ydn)-1, ydn, 'filled'); % Response y_d[n] to x[n-d]
+xlabel('n --->');
+ylabel('Amplitude');
+title('The delayed output sequence');
+grid on;
+
+% Check for time-invariance:
+% Shift y[n] by 'd' and compare with y_d[n]
+yn_delayed = [zeros(1, d), yn]; % Shift original output by 'd' zeros
+
+if isequal(yn_delayed(1:length(ydn)), ydn)
+    disp('The given system is a Time-invariant system');
+else
+    disp('The given system is a Time-variant system');
+end
