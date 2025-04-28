@@ -1,0 +1,416 @@
+clc; clear; close all; % Clear command window, workspace, and 
+
+close all figures
+
+% Define time range
+
+tmin = -5; % Minimum time
+
+
+dt = 0.1; % Time step
+
+tmax = 5; % Maximum time
+
+t = tmin:dt:tmax; % Create time vector from tmin to tmax with 
+
+step dt
+
+% Define two signals
+
+x1 = exp(2*t); % Exponential signal: e^(2t)
+
+x2 = exp(-2*t); % Exponential signal: e^(-2t)
+
+% Check if the signal is even, odd, or neither
+
+if x1 == x2 
+
+ fprintf("Signal is Even"); % If x1 equals x2, it's 
+
+even
+
+elseif x2 == -x1 
+
+ fprintf("Signal is Odd"); % If x2 equals -x1, it's 
+
+odd
+
+else
+
+ fprintf("Signal is neither even nor odd"); % Otherwise, 
+
+it's neither
+
+ 
+
+ % Compute even and odd parts of the signal
+
+ xe = (x1 + x2) / 2; % Even part: (x(t) + x(-t)) / 2
+
+ xo = (x1 - x2) / 2; % Odd part: (x(t) - x(-t)) / 2 
+
+end
+
+% Duplicate plotting section (repeats the same plots again)
+
+subplot(2,2,1); 
+
+plot(t, x1, 'g', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x1'); 
+
+grid on; 
+
+subplot(2,2,2); 
+
+plot(t, x2, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x2'); 
+
+grid on; 
+
+subplot(2,2,3); 
+
+plot(t, xe, 'r', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('xe(t)'); 
+
+title('even'); 
+
+grid on; 
+
+subplot(2,2,4); 
+
+plot(t, xo, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('xo(t)'); 
+
+title('odd'); 
+
+grid on; clc; clear; close all; % Clear command window, workspace, and 
+
+close all figures
+
+tmin = -5; dt = 0.1; tmax = 5; % Define time limits and step 
+
+size
+t = tmin:dt:tmax; % Time vector from -5 to 5 with 
+
+step of 0.1
+
+x1 = t.^2 - 5*t + 10; % Define first signal: x1(t) = 
+
+t^2 - 5t + 10
+
+x2 = t.^2 + 5*t + 10; % Define second signal: x2(t) = 
+
+t^2 + 5t + 10
+
+if x1 == x2 
+
+ fprintf("Signal is Even"); 
+
+elseif x2 == -x1 
+
+ fprintf("Signal is Odd"); 
+
+else
+
+ fprintf("Signal is neither even nor odd"); 
+
+ % Compute even and odd parts of the signal
+
+ xe = (x1 + x2) / 2; % Even component: [x(t) + x(-t)] / 2
+
+ xo = (x1 - x2) / 2; % Odd component: [x(t) - x(-t)] / 2
+
+ % Plot original signal x1
+
+ subplot(2,2,1); 
+
+ plot(t, x1, 'g', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('x(t)'); 
+
+ title('x1'); 
+
+ grid on; 
+
+ % Plot original signal x2
+
+ subplot(2,2,2); 
+
+ plot(t, x2, 'b', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('x(t)'); 
+
+ title('x2'); 
+
+ grid on; 
+
+ % Plot even part of the signal
+
+ subplot(2,2,3); 
+
+ plot(t, xe, 'r', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xe(t)'); 
+
+ title('even'); 
+
+ grid on; 
+
+ % Plot odd part of the signal
+
+ subplot(2,2,4); 
+
+ plot(t, xo, 'b', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xo(t)'); 
+
+ title('odd'); 
+
+ grid on; 
+
+end
+clc; clear; close all; % Clear command window, workspace, 
+
+and close all figures
+
+tmin = -5; dt = 0.1; tmax = 5; % Define time limits and time 
+
+step
+
+t = tmin:dt:tmax; % Create a time vector from -5 
+
+to 5
+% Define two signals
+
+x1 = t.^4 + 4*t.^2 + 6; % Signal x1(t) = t^4 + 4t^2 + 6 
+
+(even function)
+
+x2 = t.^4 + 4*t.^2 + 6; % Signal x2(t), same as x1(t)
+
+% Check whether the signal is even, odd, or neither
+
+if x1 == x2 
+
+ fprintf("Signal is Even"); 
+
+elseif x2 == -x1 
+
+ fprintf("Signal is Odd"); 
+
+else
+
+ fprintf("Signal is neither even nor odd"); 
+
+ % Calculate even and odd parts only if not purely even/odd
+
+ xe = (x1 + x2) / 2; % Even part formula
+
+ xo = (x1 - x2) / 2; % Odd part formula
+
+end
+
+% Plot x1
+
+subplot(2,2,1); 
+
+plot(t, x1, 'r', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x1'); 
+
+grid on; 
+
+% Plot x2
+
+subplot(2,2,2); 
+
+plot(t, x2, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x2'); 
+
+grid on; clc; clear; close all; % Clear command window, variables, and 
+
+close all figures
+
+% Define time range
+
+tmin = -1; dt = 0.01; tmax = 1; 
+
+t = tmin:dt:tmax; % Time vector from -1 to 1 with increment 
+
+0.01
+
+% Define the original signal x1
+
+x1 = 10 * sin(10 * pi * t + (pi / 4)); % Sine wave with phase 
+
+shift
+
+% Define the time-reversed version of x1
+
+x2 = 10 * sin(-10 * pi * t + (pi / 4)); % Check for even/odd 
+
+properties
+
+% Check if the signal is even, odd, or neither
+
+if x1 == x2 
+
+ fprintf("Signal is Even"); 
+
+elseif x2 == -x1 
+
+ fprintf("Signal is Odd"); 
+
+else
+
+ fprintf("Signal is neither even nor odd"); 
+
+ % Compute even part of the signal
+
+ xe = (x1 + x2) / 2; % Compute odd part of the signal
+
+ xo = (x1 - x2) / 2; 
+
+ % Plot the even part
+
+ subplot(2,2,3); 
+
+ plot(t, xe, 'r', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xe(t)'); 
+
+ title('even'); 
+
+ grid on; 
+
+ % Plot the odd part
+
+ subplot(2,2,4); 
+
+ plot(t, xo, 'b', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xo(t)'); 
+
+ title('odd'); 
+
+ grid on; 
+
+end
+
+% Plot original signal x1
+
+subplot(2,2,1); 
+
+plot(t, x1, 'r', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x1'); 
+
+grid on; 
+
+% Plot time-reversed signal x2
+
+subplot(2,2,2); 
+
+plot(t, x2, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x2'); 
+
+grid on; clc; clear; close all; 
+
+tmin = -5; dt = 0.1; tmax = 5; % Define time range and time 
+
+step
+
+t = tmin:dt:tmax; % Time vector from -5 to 5
+
+% Define the signals
+
+x1 = cos(t) + sin(t) + cos(t).*sin(t); % Signal x1(t)
+
+x2 = cos(t) - sin(t) - cos(t).*sin(t); % Signal x2(t)
+% Check symmetry of the signal
+
+if x1 == x2 
+
+ fprintf("Signal is Even"); 
+
+elseif x2 == -x1 
+
+ fprintf("Signal is Odd"); 
+
+else
+
+ fprintf("Signal is neither even nor odd"); 
+
+ % Compute even and odd parts
+
+ xe = (x1 + x2)/2; 
+
+ xo = (x1 - x2)/2; 
+
+ % Plot even part
+
+ subplot(2,2,3); 
+
+ plot(t, xe, 'r', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xe(t)'); 
+
+ title('even'); 
+
+ grid on; 
+
+ % Plot odd part
+
+ subplot(2,2,4); 
+
+ plot(t, xo, 'm', 'LineWidth', 2); 
+
+ xlabel('t'); ylabel('xo(t)'); 
+
+ title('odd'); 
+
+ grid on; 
+
+end
+
+% Plot original signal x1
+
+subplot(2,2,1); 
+
+plot(t, x1, 'g', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x1'); 
+
+grid on; 
+
+% Plot original signal x2
+
+subplot(2,2,2); 
+
+plot(t, x2, 'b', 'LineWidth', 2); 
+
+xlabel('t'); ylabel('x(t)'); 
+
+title('x2'); 
+
+grid on; 
