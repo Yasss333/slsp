@@ -1,0 +1,114 @@
+clc; % Clear command window
+clear; % Clear all variables
+close all; % Close all figure windows
+
+n = -10:1:10; % Define the discrete-time index range from -10 to 10
+
+A = 0.8; % Amplitude factor
+
+x1 = A.^n; % Define the original exponential signal x(n)
+x2 = A.^(-n); % Time-reversed signal x(-n)
+
+% Check if the signal is even, odd, or neither
+if isequal(x2, x1)
+    disp('The given signal is an even signal');
+elseif isequal(x2, -x1)
+    disp('The given signal is an odd signal');
+else
+    disp('The given signal is neither even nor odd');
+end
+
+% Compute even and odd components
+xe = (x1 + x2) / 2; % Even part of the signal
+xo = (x1 - x2) / 2; % Odd part of the signal
+
+% Plot original signal x(n)
+subplot(2,2,1);
+stem(n, x1, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('Amplitude');
+title('Original signal x(n)');
+grid on;
+
+% Plot time-reversed signal x(-n)
+subplot(2,2,2);
+stem(n, x2, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('Amplitude');
+title('Time-reversed signal x(-n)');
+grid on;
+
+% Plot even part of signal
+subplot(2,2,3);
+stem(n, xe, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('Amplitude');
+title('Even part of the signal');
+grid on;
+
+% Plot odd part of signal
+subplot(2,2,4);
+stem(n, xo, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('Amplitude');
+title('Odd part of the signal');
+grid on;
+
+% Plot reconstructed signal (even + odd)
+figure;
+stem(n, xe + xo, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('Amplitude');
+title('Reconstructed original signal');
+grid on;
+
+% Compute real and imaginary parts of the exponential signal x1
+xr = real(x1); % Real part (should be same as x1)
+xi = imag(x1); % Imaginary part (should be zero)
+
+% Plot real and imaginary parts
+figure;
+
+subplot(5,1,1);
+stem(n, xr, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('xr(n)');
+title('Real part of exponential signal');
+grid on;
+
+subplot(5,1,2);
+stem(n, xi, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('xi(n)');
+title('Imaginary part of exponential signal');
+grid on;
+
+% Define a complex exponential signal
+f = 1; % Frequency
+x3 = exp(1j * 2 * pi * f * n); % Complex exponential signal
+
+% Plot complex exponential signal
+subplot(5,1,3);
+stem(n, x3, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('x3(n)');
+title('Complex exponential signal');
+grid on;
+
+% Extract and plot real part of complex exponential signal
+x4 = real(x3);
+subplot(5,1,4);
+stem(n, x4, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('x4(n)');
+title('Real part of complex exponential signal');
+grid on;
+
+% Extract and plot imaginary part of complex exponential signal
+x5 = imag(x3);
+subplot(5,1,5);
+stem(n, x5, 'filled');
+xlabel('Discrete time n ---->');
+ylabel('x5(n)');
+title('Imaginary part of complex exponential signal');
+grid on;
